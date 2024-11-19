@@ -9,15 +9,15 @@ $request = \Bitrix\Main\Context::getCurrent()->getRequest();
 $pageSize = empty($request->getQuery('pageSize')) ? 10 : (Integer) $request->getQuery('pageSize');
 $page = empty($request->getQuery('page')) ? 1 : (Integer) $request->getQuery('page');
 
-// Ключи и имена авторов
-$authors = [];
 $resultJsonItems = []; 
 
+// Ключи и имена авторов
+$authors = [];
 $resultAuthors = \Bitrix\Iblock\Elements\ElementAuthorsTable::getList(array(
    'select' => ['*'], 
     'limit' => 1000, 
     'offset' => 0,
-	'cache' => array(
+    'cache' => array(
         'ttl' => CACHE_TIME,
         'cache_joins' => true,
     )
@@ -38,7 +38,7 @@ $resultNews = \Bitrix\Iblock\Elements\ElementNewsTable::getList(array(
 		], 
     'offset' => $pageSize * ($page - 1),
     'limit' => $pageSize,
-	'cache' => array(
+    'cache' => array(
         'ttl' => CACHE_TIME,
         'cache_joins' => true,
     )
